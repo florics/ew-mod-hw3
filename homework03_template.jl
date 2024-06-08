@@ -59,6 +59,7 @@ StorageLosses = readin("storagelosses.csv",default=1,dims=2, dir=data_dir)
 
 # Parameters for Trade
 TradeDistance = readin("tradedistance.csv", default=0, dims=2, dir=data_dir)
+TradeCostFactor = readin("tradecostfactor.csv", default=1, dims=1)
 
 # our emission limit
 EmissionLimit = 20000
