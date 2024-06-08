@@ -57,6 +57,9 @@ StorageDischargeEfficiency = readin("storagedischargeefficiency.csv",dims=2, dir
 MaxStorageCapacity = readin("maxstoragecapacity.csv",default=50,dims=2, dir=data_dir)
 StorageLosses = readin("storagelosses.csv",default=1,dims=2, dir=data_dir)
 
+# Parameters for Trade
+TradeDistance = readin("tradedistance.csv", default=0, dims=2, dir=data_dir)
+
 # our emission limit
 EmissionLimit = 20000
 
