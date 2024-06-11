@@ -60,6 +60,7 @@ StorageLosses = readin("storagelosses.csv",default=1,dims=2, dir=data_dir)
 # Parameters for Trade
 TradeDistance = readin("tradedistance.csv", default=0, dims=2, dir=data_dir)
 TradeCostFactor = readin("tradecostfactor.csv", default=1, dims=1, dir=data_dir)
+TradeLossFactor = readin("tradelossfactor.csv", default=0, dims=1, dir=data_dir)
 
 # our emission limit
 EmissionLimit = 20000
@@ -174,9 +175,10 @@ ESM = Model(HiGHS.Optimizer)
 )
 
 @constraint(ESM, ImportExportBalance[r in regions, rr in regions, h in hour, f in fuels],
-    Import[r,rr,h,f] == Export[rr,r,h,f]
+    Import[r,rr,h,f] == (1-TradeLossFactor[f]*TradeDistance[rr,r])*Export[rr,r,h,f]
 )
 
+#remark that we could also limit the export with this max, with would give a different result
 @constraint(ESM, MaxImportFunction[r in regions,rr in regions,h in hour,f in fuels],
     Import[r,rr,h,f] <= MaxTradeCapacity[r,rr,f]
 )
