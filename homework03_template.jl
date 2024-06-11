@@ -186,7 +186,7 @@ ESM = Model(HiGHS.Optimizer)
 @objective(ESM, Min, 
     sum(TotalCost[r,t] for t in technologies for r in regions) 
     + sum(TotalStorageCost[r,s] for s in storages for r in regions)
-    + sum(0.1 * (Export[rr,r,h,f] + Import[r,rr,h,f]) for h in hour, r in regions, rr in regions, f in fuels)
+    + sum(TradeCostFactor[f] * TradeDistance[r,rr] * Export[r,rr,h,f] for h in hour, r in regions, rr in regions, f in fuels)
     )
 
 # this starts the optimization
